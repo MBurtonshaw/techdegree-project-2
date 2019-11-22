@@ -33,7 +33,7 @@ let pageArray = [];
 
 function makeStudentArray(list) {
   for (let i = 0; i < li.length; i++) {
-  studentArray = studentArray.push(li[i]);
+  studentArray += studentArray.push(li[i]);
 } return studentArray;
 }
 /*
