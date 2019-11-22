@@ -2,26 +2,14 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-   
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
 const ul = document.getElementsByClassName("student-list");
 const li = document.getElementsByClassName("student-item");
 const wholePage = document.querySelector(".page");
 const studentsPerPage = 10;
 let currentPage = 0;
 let numberOfPages = 0;
+
 //currentPage above^ is set to 0, so pageOne adds 1 to currentPage, etc.      
 function pageOne() {
     currentPage += 1;
@@ -73,9 +61,9 @@ function pageSix() {
 //Still needs conditionals
 
 //Main function
-function showPage(page) {
+function showPage() {
   let studentArray = [];
-  page = [];
+  let pageArray = [];
 //This function creates a loop that assigns all the li elements into an array
     function makeStudentArray() {
     for (let i = 0; i < li.length; i++) {
@@ -90,27 +78,25 @@ function showPage(page) {
     function getNumberOfPages() {
         return Math.ceil(studentArray.length/studentsPerPage);
     }
-
         
 //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
     function loadList() {
         let begin = ((currentPage - 1) * studentsPerPage);
         let end = begin + studentsPerPage;
         pageArray = studentArray.slice(begin, end);
+        return pageArray;
     }
- 
-//You're doing so well!! You've got the basic framework down, now you just need to work on the actual display, and then the buttons!
 
-
+//This is the logic to display the li items onto the page
     function createList() {
         ul.innerHTML = "";
-        for (let j = 0; j < page.length; j++) {
-            ul.innerHTML += page[j] + "<br>";
+        for (let j = 0; j < pageArray.length; j++) {
+            ul.innerHTML += pageArray[j] + "<br>";
         }
     }
         
 }
-showPage(pageOne);
+console.log(showPage(pageOne));
 
         
 /*** 
