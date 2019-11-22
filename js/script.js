@@ -31,21 +31,20 @@ let pageArray = [];
 //Right now, the function sets all the students into an [array]
 //Still needs conditionals
 
-function makeStudentArray(li) {
+function makeStudentArray(list) {
   for (let i = 0; i < li.length; i++) {
   studentArray = studentArray.push(li[i]);
 } return studentArray;
 }
-
+/*
 //Main function
 function showPage() {
 //This function creates a loop that assigns all the li elements into an array
 
         
 //This function contains the logic behind setting ten li elements per page. Math.ceil assures that there will be six pages for 54 items.
-  function getNumberOfPages(studentArray) {
-    Math.ceil(studentArray.length / studentsPerPage);
-    return studentArray;
+  function getNumberOfPages(array) {
+    return Math.ceil(studentArray.length / studentsPerPage);
     }
     
  /* function pageOne() {
@@ -78,6 +77,7 @@ function showPage() {
     loadList(); 
 }*/
 //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
+ /*
   function loadList() {
     let begin = ((currentPage - 1) * studentsPerPage);
     let end = begin + studentsPerPage;
