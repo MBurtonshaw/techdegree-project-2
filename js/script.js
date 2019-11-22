@@ -7,8 +7,10 @@ const ul = document.getElementsByClassName("student-list");
 const li = document.getElementsByClassName("student-item");
 const wholePage = document.querySelector(".page");
 const studentsPerPage = 10;
-let currentPage = 0;
-let numberOfPages = 0;
+let currentPage = 1;
+let numberOfPages = 1;
+let studentArray = [];
+let pageArray = [];
 
 
 /*** 
@@ -29,72 +31,69 @@ let numberOfPages = 0;
 //Right now, the function sets all the students into an [array]
 //Still needs conditionals
 
+function makeStudentArray(li) {
+  for (let i = 0; i < li.length; i++) {
+  studentArray = studentArray.push(li[i]);
+} return studentArray;
+}
+
 //Main function
 function showPage() {
-  let studentArray = [];
-  let pageArray = [];
 //This function creates a loop that assigns all the li elements into an array
-    function makeStudentArray() {
-    for (let i = 0; i < li.length; i++) {
-        studentArray.push(li[i]);
-        
-    function numberOfPage() {
-        getNumberOfPages();
-    }
-    }
 
+        
 //This function contains the logic behind setting ten li elements per page. Math.ceil assures that there will be six pages for 54 items.
-    function getNumberOfPages() {
-        return Math.ceil(studentArray.length/studentsPerPage);
+  function getNumberOfPages(studentArray) {
+    Math.ceil(studentArray.length / studentsPerPage);
+    return studentArray;
     }
-      
-    function pageOne() {
+    
+ /* function pageOne() {
     currentPage += 1;
     loadList();
 }
     
-    function pageTwo() {
-        currentPage += 2;
-        loadList();
+  function pageTwo() {
+    currentPage += 2;
+    loadList();
 }
 
-    function pageThree() {
-        currentPage += 3;
-        loadList();
+  function pageThree() {
+    currentPage += 3;
+    loadList();
 }
 
-    function pageFour() {
-        currentPage += 4;
-        loadList();
+  function pageFour() {
+    currentPage += 4;
+    loadList();
 }
 
-    function pageFive() {
-        currentPage += 5;
-        loadList();
+  function pageFive() {
+    currentPage += 5;
+    loadList();
 }
 
-    function pageSix() {
-        currentPage += 6;
-        loadList();
-}
+  function pageSix() {
+    currentPage += 6;
+    loadList(); 
+}*/
 //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
-    function loadList() {
-        let begin = ((currentPage - 1) * studentsPerPage);
-        let end = begin + studentsPerPage;
-        pageArray = studentArray.slice(begin, end);
-        return pageArray;
-    }
+  function loadList() {
+    let begin = ((currentPage - 1) * studentsPerPage);
+    let end = begin + studentsPerPage;
+    pageArray = studentArray.slice(begin, end);
+    return pageArray;
+}
 
 //This is the logic to display the li items onto the page
-    function createList() {
-        ul.innerHTML = "";
-        for (let j = 0; j < pageArray.length; j++) {
-            ul.innerHTML += pageArray[j] + "<br>";
-        }
-    }
+  function createList() {
+    ul.innerHTML = "";
+    for (let j = 0; j < pageArray.length; j++) {
+    ul.innerHTML += pageArray[j] + "<br>";
+}
+}
         
 }
-
         
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -142,4 +141,5 @@ function appendPageLinks() {
 
 */
 
-console.log(showPage(pageOne));
+//console.log(showPage());
+//^Throws undefined error
