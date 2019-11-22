@@ -10,37 +10,6 @@ const studentsPerPage = 10;
 let currentPage = 0;
 let numberOfPages = 0;
 
-//currentPage above^ is set to 0, so pageOne adds 1 to currentPage, etc.      
-function pageOne() {
-    currentPage += 1;
-    loadList();
-}
-    
-function pageTwo() {
-    currentPage += 2;
-    loadList();
-}
-    
-function pageThree() {
-    currentPage += 3;
-    loadList();
-}
-    
-function pageFour() {
-    currentPage += 4;
-    loadList();
-}
-    
-function pageFive() {
-    currentPage += 5;
-    loadList();
-}
-        
-function pageSix() {
-    currentPage += 6;
-    loadList();
-}
-
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -78,7 +47,36 @@ function showPage() {
     function getNumberOfPages() {
         return Math.ceil(studentArray.length/studentsPerPage);
     }
-        
+      
+    function pageOne() {
+    currentPage += 1;
+    loadList();
+}
+    
+    function pageTwo() {
+        currentPage += 2;
+        loadList();
+}
+
+    function pageThree() {
+        currentPage += 3;
+        loadList();
+}
+
+    function pageFour() {
+        currentPage += 4;
+        loadList();
+}
+
+    function pageFive() {
+        currentPage += 5;
+        loadList();
+}
+
+    function pageSix() {
+        currentPage += 6;
+        loadList();
+}
 //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
     function loadList() {
         let begin = ((currentPage - 1) * studentsPerPage);
@@ -96,7 +94,6 @@ function showPage() {
     }
         
 }
-console.log(showPage(pageOne));
 
         
 /*** 
@@ -144,4 +141,5 @@ function appendPageLinks() {
 
 
 */
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+
+console.log(showPage(pageOne));
