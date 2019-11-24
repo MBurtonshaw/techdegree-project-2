@@ -3,13 +3,8 @@ Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
 
-const ul = document.getElementsByClassName("student-list");
 const li = document.getElementsByClassName("student-item");
-const wholePage = document.querySelector(".page");
 const studentsPerPage = 10;
-let currentPage = 1;
-let numberOfPages = 1;
-let studentArray = [];
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -25,103 +20,60 @@ let studentArray = [];
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
+//Eventually, fit your code into this format
+function showPage(list, page){
 
 //Right now, the function sets all the students into an [array]
-//Still needs conditionals
 
-function makeStudentArray(list) {
-  for (let i = 0; i < list.length; i++) {
-    studentArray.push(list[i]);
-  }  return studentArray;
-}
+  function makeStudentArray(list) {
+      let studentArray = [];
+      for (let i = 0; i < list.length; i++) {
+        studentArray.push(list[i]);
+      } return studentArray;
+    }
+    
+    let mainArray = makeStudentArray(li);
 
-const mainArray = makeStudentArray(li);
+    //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
+    //--WORKING
 
-//console.log(mainArray);
+    function itemsPer(page) {
+      let begin = ((page - 1) * studentsPerPage);
+      let end = begin + studentsPerPage;
+      return mainArray.slice(begin, end);
+    }
 
-//Main function
-//function showPage() {
+    let pages = {
+        pg1 : { value : itemsPer(1), display : "hidden" },
+        pg2 : { value : itemsPer(2), display : "hidden" },
+        pg3 : { value : itemsPer(3), display : "hidden" },
+        pg4 : { value : itemsPer(4), display : "hidden" },
+        pg5 : { value : itemsPer(5), display : "hidden" },
+        pg6 : { value : itemsPer(6), display : "hidden" }
+    };
 
-//This function contains the logic behind setting ten li elements per page. Math.ceil assures that there will be six pages for 54 items.
+    //--NEEDS WORK
+    //This is the logic to display the li items onto the page
+    function createList(page) {
+      if (page === pages.pg1) {
+        pages.pg1.display = "block";
 
-function getNumberOfPages(array) {
-  return Math.ceil(array.length / studentsPerPage);
-}
+      } else if (page === pages.pg2) {
+        pages.pg2.display = "block";
 
-const numPages = getNumberOfPages(mainArray);
+      } else if (page === pages.pg3) {
+        pages.pg3.display = "block";
 
-console.log(numPages);
+      } else if (page === pages.pg4) {
+        pages.pg4.display = "block";
 
-//This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
-//--WORKING
+      } else if (page === pages.pg5) {
+        pages.pg5.display = "block";
 
-console.log(currentPage);
-
-function loadList(page) {
-  let begin = ((page - 1) * studentsPerPage);
-  let end = begin + studentsPerPage;
-  return mainArray.slice(begin, end);
-}
-
-const pageOne = loadList(1);
-const pageTwo = loadList(2);
-const pageThree = loadList(3);
-const pageFour = loadList(4);
-const pageFive = loadList(5);
-const pageSix = loadList(6);
-
-
-//--WORKING
-//This is the logic to display the li items onto the page
-function createList(pageNum) {
-  if (pageNum === 1) {
-    pageOne.style.display = "block";
-    pageTwo.style.display = "none";
-    pageThree.style.display = "none";
-    pageFour.style.display = "none";
-    pageFive.style.display = "none";
-    pageSix.style.display = "none";
-  } else if (pageNum === 2) {
-      pageOne.style.display = "none";
-      pageTwo.style.display = "block";
-      pageThree.style.display = "none";
-      pageFour.style.display = "none";
-      pageFive.style.display = "none";
-      pageSix.style.display = "none"; 
-  } else if (pageNum === 3) {
-      pageOne.style.display = "none";
-      pageTwo.style.display = "none";
-      pageThree.style.display = "block";
-      pageFour.style.display = "none";
-      pageFive.style.display = "none";
-      pageSix.style.display = "none";
-  } else if (pageNum === 4) {
-      pageOne.style.display = "none";
-      pageTwo.style.display = "none";
-      pageThree.style.display = "none";
-      pageFour.style.display = "block";
-      pageFive.style.display = "none";
-      pageSix.style.display = "none";
-  } else if (pageNum === 5) {
-      pageOne.style.display = "none";
-      pageTwo.style.display = "none";
-      pageThree.style.display = "none";
-      pageFour.style.display = "none";
-      pageFive.style.display = "block";
-      pageSix.style.display = "none";
-  } else if (pageNum === 6) {
-      pageOne.style.display = "none";
-      pageTwo.style.display = "none";
-      pageThree.style.display = "none";
-      pageFour.style.display = "none";
-      pageFive.style.display = "none";
-      pageSix.style.display = "block";
-  }  
-}
-
-console.log(createList(pageSix));
-
- /*
+      } else if (page === pages.pg6) {
+        pages.pg6.display = "block";
+      }
+    }
 }
 
 /***
@@ -167,6 +119,7 @@ function appendPageLinks() {
   pg6.innerHTML = "6";
   ul.appendChild(pg6);
 }
+
 
 appendPageLinks();
 
