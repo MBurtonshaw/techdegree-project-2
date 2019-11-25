@@ -20,59 +20,19 @@ const studentsPerPage = 10;
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
-//Eventually, fit your code into this format
-function showPage(list, page){
 
-//Right now, the function sets all the students into an [array]
-
-  function makeStudentArray(list) {
-      let studentArray = [];
-      for (let i = 0; i < list.length; i++) {
-        studentArray.push(list[i]);
-      } return studentArray;
-    }
-    
-    let mainArray = makeStudentArray(li);
-
-    //This function sets how many li elements appear per page. Example- page 1: begin = (1-1) * 10 = 0. End = 0 + 10. pageArray lists li[0-10].
-    //--WORKING
-
-    function itemsPer(page) {
-      let begin = ((page - 1) * studentsPerPage);
-      let end = begin + studentsPerPage;
-      return mainArray.slice(begin, end);
-    }
-
-    let pages = {
-        pg1 : { value : itemsPer(1), display : "hidden" },
-        pg2 : { value : itemsPer(2), display : "hidden" },
-        pg3 : { value : itemsPer(3), display : "hidden" },
-        pg4 : { value : itemsPer(4), display : "hidden" },
-        pg5 : { value : itemsPer(5), display : "hidden" },
-        pg6 : { value : itemsPer(6), display : "hidden" }
-    };
-
-    //--NEEDS WORK
-    //This is the logic to display the li items onto the page
-    function createList(page) {
-      if (page === pages.pg1) {
-        pages.pg1.display = "block";
-
-      } else if (page === pages.pg2) {
-        pages.pg2.display = "block";
-
-      } else if (page === pages.pg3) {
-        pages.pg3.display = "block";
-
-      } else if (page === pages.pg4) {
-        pages.pg4.display = "block";
-
-      } else if (page === pages.pg5) {
-        pages.pg5.display = "block";
-
-      } else if (page === pages.pg6) {
-        pages.pg6.display = "block";
-      }
+//Right now, the function is targeting everything in the list, not just 1-10
+//Goal is, if page = #, [i].display = block, else [i].display = hidden
+//Six if statements, ending with an else
+function showPage(list, page) {
+    let begin = (page-1) * studentsPerPage;    //Sets number of list items per page; example: page (1-1) * 10 = 0... 0 + 10 = 10... 0-10 items
+    let end = begin + studentsPerPage;
+    for (let i = 0; i < list.length; i++) {     
+        if (i >= begin && i < end) {            
+            list[i].style.display = "block";
+        } else {
+            list[i].style.display = "none";
+        }
     }
 }
 
@@ -81,48 +41,40 @@ function showPage(list, page){
    functionality to the pagination buttons.
 ***/
 
-/*
 function appendPageLinks() {
-  const pg1 = document.createElement("BUTTON");
-  pg1.id = "first";
-  pg1.value = pageOne();
-  pg1.innerHTML = "1";
-  ul.appendChild(pg1);
-  
-  const pg2 = document.createElement("BUTTON");
-  pg2.id = "second";
-  pg2.value = pageTwo();
-  pg2.innerHTML = "2";
-  ul.appendChild(pg2);
-  
-  const pg3 = document.createElement("BUTTON");
-  pg3.id = "third";
-  pg3.value = pageThree();
-  pg3.innerHTML = "3";
-  ul.appendChild(pg3);
-  
-  const pg4 = document.createElement("BUTTON");
-  pg4.id = "fourth";
-  pg4.value = pageFour();
-  pg4.innerHTML = "4";
-  ul.appendChild(pg4);
-  
-  const pg5 = document.createElement("BUTTON");
-  pg5.id = "fifth";
-  pg5.value = pageFive();
-  pg5.innerHTML = "5";
-  ul.appendChild(pg5);
-  
-  const pg6 = document.createElement("BUTTON");
-  pg6.id = "sixth";
-  pg6.value = pageSix();
-  pg6.innerHTML = "6";
-  ul.appendChild(pg6);
+    
+    function createButton(page) {
+        let ul = document.getElementsByClassName('student-list')[0]; //Must specify placement within ul to append; hence, [0]
+        let button = document.createElement("BUTTON");
+        button.textContent = page;
+        ul.appendChild(button);
+        button.addEventListener ( "click", (e) => {
+            if (e.target.tagName === "BUTTON") {
+                const pageButton = e.target;
+                if (pageButton.textContent === "1") {
+                    showPage(li, 1);
+                } else if (pageButton.textContent === "2") {
+                    showPage(li, 2);
+                } else if (pageButton.textContent === "3") {
+                    showPage(li, 3);
+                } else if (pageButton.textContent === "4") {
+                    showPage(li, 4);
+                } else if (pageButton.textContent === "5") {
+                    showPage(li, 5);
+                } else if (pageButton.textContent === "6") {
+                    showPage(li, 6);
+                }
+            }
+        });
+    }
+    
+    createButton("1");
+    createButton("2");
+    createButton("3");
+    createButton("4");
+    createButton("5");
+    createButton("6");
 }
-
 
 appendPageLinks();
 
-*/
-//console.log(showPage());
-//^Throws undefined error
