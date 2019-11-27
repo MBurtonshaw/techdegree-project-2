@@ -32,15 +32,18 @@ function showPage(list, page) {
 function appendPageLinks(list) {
 
     function createButton() {
+        
       let totalPages = Math.ceil(list.length / studentsPerPage);
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
-        //must be set to [0] because it is a collection of HTML elements, not one node in itself
+        
+    //otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
       let otherDiv = document.getElementsByClassName("page")[0];
       let ul = document.createElement("UL");
       newDiv.appendChild(ul);
       otherDiv.appendChild(newDiv);
-      
+        
+    //Loop is to set the number of pages based on totalPages, then create a page button corresponding to each
       for ( let i = 0; i < totalPages; i++) {
  
       let button = document.createElement("LI");
@@ -49,9 +52,10 @@ function appendPageLinks(list) {
       button.appendChild(a);
       a.textContent = i;
       a.href = "#";
+      
       createButton(i);
          
-      } showPage(list);
+      } 
     }   
 }
 
