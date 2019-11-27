@@ -31,7 +31,6 @@ function showPage(list, page) {
 
 function appendPageLinks(list) {
 
-    function createButton() {
         
       let totalPages = Math.ceil(list.length / studentsPerPage);
       const newDiv = document.createElement("DIV");
@@ -50,44 +49,30 @@ function appendPageLinks(list) {
       let a = document.createElement("A");
       ul.appendChild(button);
       button.appendChild(a);
-      a.textContent = i;
+      a.textContent = i + 1;
       a.href = "#";
-      
-      createButton(i);
-         
-      } 
+        
+        //Adding function to the buttons
+        button.addEventListener ( "click", (e) => {
+          if (e.target.className === "pagination") {
+            const pageButton = e.target;
+            if (pageButton.textContent === "1") {
+                showPage(li, 1);
+            } else if (pageButton.textContent === "2") {
+                showPage(li, 2);
+            } else if (pageButton.textContent === "3") {
+                showPage(li, 3);
+            } else if (pageButton.textContent === "4") {
+                showPage(li, 4);
+            } else if (pageButton.textContent === "5") {
+                showPage(li, 5);
+            } else if (pageButton.textContent === "6") {
+                showPage(li, 6);
+            }
+        }
+      });
+
     }   
 }
 
 appendPageLinks(li);
-
-//Code to be recycled:
-        /*
-        li.addEventListener ( "click", (e) => {
-            if (e.target.className === "pagination") {
-                const pageButton = e.target;
-                if (pageButton.textContent === "1") {
-                    showPage(li, 1);
-                } else if (pageButton.textContent === "2") {
-                    showPage(li, 2);
-                } else if (pageButton.textContent === "3") {
-                    showPage(li, 3);
-                } else if (pageButton.textContent === "4") {
-                    showPage(li, 4);
-                } else if (pageButton.textContent === "5") {
-                    showPage(li, 5);
-                } else if (pageButton.textContent === "6") {
-                    showPage(li, 6);
-                }
-            }
-            });
-
-    createButton("1");
-    createButton("2");
-    createButton("3");
-    createButton("4");
-    createButton("5");
-    createButton("6");
-
-*/
-//appendPageLinks();
