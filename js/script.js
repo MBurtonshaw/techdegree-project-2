@@ -31,10 +31,13 @@ function showPage(list, page) {
 
 function appendPageLinks(list) {
 
-        
-      let totalPages = Math.ceil(list.length / studentsPerPage);
+    showPage(li, 1);
+    
+
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
+    
+
         
     //otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
       let otherDiv = document.getElementsByClassName("page")[0];
@@ -43,36 +46,33 @@ function appendPageLinks(list) {
       otherDiv.appendChild(newDiv);
         
     //Loop is to set the number of pages based on totalPages, then create a page button corresponding to each
-      for ( let i = 0; i < totalPages; i++) {
- 
+      let totalPages = Math.ceil(list.length / studentsPerPage);
+      for (i = 0; i < totalPages; i++) {
+            
       let button = document.createElement("LI");
       let a = document.createElement("A");
       ul.appendChild(button);
       button.appendChild(a);
+      a.className = "paginationButton";
       a.textContent = i + 1;
       a.href = "#";
         
         //Adding function to the buttons
         button.addEventListener ( "click", (e) => {
-          if (e.target.className === "pagination") {
+          if (e.target.className === "paginationButton") {
             const pageButton = e.target;
-            if (pageButton.textContent === "1") {
-                showPage(li, 1);
-            } else if (pageButton.textContent === "2") {
-                showPage(li, 2);
-            } else if (pageButton.textContent === "3") {
-                showPage(li, 3);
-            } else if (pageButton.textContent === "4") {
-                showPage(li, 4);
-            } else if (pageButton.textContent === "5") {
-                showPage(li, 5);
-            } else if (pageButton.textContent === "6") {
-                showPage(li, 6);
-            }
+              
+            if (pageButton.textContent === i + 1) {
+                showPage(list, i);
+                pageButton.id = "button1";
+                let newButton = document.getElementById("button1");
+                newButton.style.color = "purple";
+            } 
         }
       });
-
-    }   
+    }
 }
+
+
 
 appendPageLinks(li);
