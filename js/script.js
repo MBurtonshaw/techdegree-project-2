@@ -22,23 +22,13 @@ function showPage(list, page) {
 }
 
 
-/***
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
-
-
 function appendPageLinks(list) {
 
     showPage(li, 1);
     
-
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
     
-
-        
     //otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
       let otherDiv = document.getElementsByClassName("page")[0];
       let ul = document.createElement("UL");
@@ -56,8 +46,25 @@ function appendPageLinks(list) {
       a.className = "paginationButton";
       a.textContent = i + 1;
       a.href = "#";
+          
+    //Add searchbar--- NOT FUNCTIONING YET--- source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
+      function searchBar() {
+        const searchBar = document.createElement("INPUT");
+        searchBar.type = "text";
+        searchBar.onKeyUp = searchBar();
+        const filter = searchBar.value.toUpperCase();
+        for (j = 0; j < li.length; j++) {
+              showPage(list, i)
+              txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                } else {
+                li[i].style.display = "none";
+          }
+      }
+      }
         
-        //Adding function to the buttons
+        //Adding function to the buttons--- NOT FUNCTIONING YET
         button.addEventListener ( "click", (e) => {
           if (e.target.className === "paginationButton") {
             const pageButton = e.target;
@@ -67,12 +74,10 @@ function appendPageLinks(list) {
                 pageButton.className = "newClass";
                 let newButton = document.getElementsByClassName("newClass");
                 newButton.style.color = "purple";
-            } 
+            }
         }
       });
     }
 }
-
-
 
 appendPageLinks(li);
