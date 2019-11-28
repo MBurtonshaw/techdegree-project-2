@@ -64,8 +64,8 @@ function appendPageLinks(list) {
               
             if (pageButton.textContent === i + 1) {
                 showPage(list, i);
-                pageButton.id = "button1";
-                let newButton = document.getElementById("button1");
+                pageButton.className = "newClass";
+                let newButton = document.getElementsByClassName("newClass");
                 newButton.style.color = "purple";
             } 
         }
