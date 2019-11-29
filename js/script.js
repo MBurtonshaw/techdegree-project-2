@@ -6,10 +6,39 @@ FSJS project 2 - List Filter and Pagination
 const li = document.getElementsByClassName("student-item");
 const studentsPerPage = 10;
 
+//Add searchbar--- NOT FUNCTIONING YET--- source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
+function searchBar(list) {
+      
+      const bar = document.createElement("INPUT");
+      const header = document.getElementsByClassName("page-header")[0];
+      const submit = document.createElement("BUTTON");
+      const filter = bar.value.toUpperCase();
+      
+      bar.type = "text";
+      bar.id = "field";
+      header.appendChild(bar);
+      submit.textContent = "submit";
+      header.appendChild(submit);
+        
+    submit.addEventListener ("click", (e) => {
+        
+    //Trying to target the class name, then narrow it by h3 value. Source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
+      for (var k = 0; k < list; k++) {
+          let result = list[k].getElementsByTagName("h3")[0];
+          let textValue = result.textContent || result.innerText;
+          if (textValue.toUpperCase().indexOf(filter) > -1) {
+              result.style.display = "";
+            } else {
+                result.style.display = "none";
+            }
+      }
+    }); 
+}
+  
 
 function showPage(list, page) {
-//Sets number of list items per page; example: page (1-1) * 10 = 0... 0 + 10 = 10... 0-10 items
-    
+
+  //Sets number of list items per page; example: page (1-1) * 10 = 0... 0 + 10 = 10... 0-10 items
     let begin = (page-1) * studentsPerPage;    
     let end = begin + studentsPerPage;
     for (let i = 0; i < list.length; i++) {     
@@ -25,6 +54,7 @@ function showPage(list, page) {
 function appendPageLinks(list) {
 
     showPage(li, 1);
+    searchBar(li);
     
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
@@ -34,7 +64,7 @@ function appendPageLinks(list) {
       let ul = document.createElement("UL");
       newDiv.appendChild(ul);
       otherDiv.appendChild(newDiv);
-        
+    
     //Loop is to set the number of pages based on totalPages, then create a page button corresponding to each
       let totalPages = Math.ceil(list.length / studentsPerPage);
       for (i = 0; i < totalPages; i++) {
@@ -43,41 +73,22 @@ function appendPageLinks(list) {
       let a = document.createElement("A");
       ul.appendChild(button);
       button.appendChild(a);
-      a.className = "paginationButton";
+      a.className = "paginationButtons";
       a.textContent = i + 1;
       a.href = "#";
-          
-    //Add searchbar--- NOT FUNCTIONING YET--- source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
-      function searchBar() {
-        const searchBar = document.createElement("INPUT");
-        searchBar.type = "text";
-        searchBar.onKeyUp = searchBar();
-        const filter = searchBar.value.toUpperCase();
-        for (j = 0; j < li.length; j++) {
-              showPage(list, i)
-              txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-                } else {
-                li[i].style.display = "none";
-          }
-      }
-      }
         
-        //Adding function to the buttons--- NOT FUNCTIONING YET
+        //Adding function to the buttons
         button.addEventListener ( "click", (e) => {
-          if (e.target.className === "paginationButton") {
+            let buttons = document.getElementsByTagName("a");
+            for (let i = 0; i < totalPages; i++) {
+                buttons[i].className = "";
             const pageButton = e.target;
-              
-            if (pageButton.textContent === i + 1) {
-                showPage(list, i);
-                pageButton.className = "newClass";
-                let newButton = document.getElementsByClassName("newClass");
-                newButton.style.color = "purple";
+            pageButton.className = "active";
+            showPage(list, pageButton.textContent);
             }
-        }
-      });
+        });
     }
 }
+
 
 appendPageLinks(li);
