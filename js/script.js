@@ -12,29 +12,46 @@ function searchBar(list) {
       const bar = document.createElement("INPUT");
       const header = document.getElementsByClassName("page-header")[0];
       const submit = document.createElement("BUTTON");
-      const filter = bar.value.toUpperCase();
+      let filterList = [];
       
       bar.type = "text";
       bar.id = "field";
       header.appendChild(bar);
       submit.textContent = "submit";
       header.appendChild(submit);
+    
+    submit.addEventListener("click", (e) => {
         
-    submit.addEventListener ("click", (e) => {
+        filterList.push(bar.value.toUpperCase());
+        console.log(filterList);
+        for (let k = 0; k < filterList; k++) {
+        let result = filterList[k];
+            let textValue = result.textContent || result.innerText;
+            if (textValue.toUpperCase() = indexOf(bar.value.toUpperCase())) {
+                showPage(list, textValue);
+            } else {
+                value.style.display = "none";
+            }
+        }
+    });
+      
+    /*
+    //submit.addEventListener ("click", (e) => {
         
     //Trying to target the class name, then narrow it by h3 value. Source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
       for (var k = 0; k < list; k++) {
           let result = list[k].getElementsByTagName("h3")[0];
-          let textValue = result.textContent || result.innerText;
-          if (textValue.toUpperCase().indexOf(filter) > -1) {
-              result.style.display = "";
-            } else {
-                result.style.display = "none";
-            }
-      }
-    }); 
+          console.log(result);
+          //let textValue = result.textContent || result.innerText;
+          //if (textValue.toUpperCase().indexOf(filter) > -1) {
+              //result.style.display = "";
+            //} else {
+                //result.style.display = "none";
+            //}
+      //}
+    //}); 
+}*/
 }
-  
 
 function showPage(list, page) {
 
@@ -89,6 +106,7 @@ function appendPageLinks(list) {
         });
     }
 }
+
 
 
 appendPageLinks(li);
