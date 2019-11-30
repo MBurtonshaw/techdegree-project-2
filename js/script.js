@@ -10,48 +10,29 @@ const studentsPerPage = 10;
 function searchBar(list) {
       
       const bar = document.createElement("INPUT");
+      bar.type = "text";
+      bar.id = "field";
       const header = document.getElementsByClassName("page-header")[0];
       const submit = document.createElement("BUTTON");
       let filterList = [];
-      
-      bar.type = "text";
-      bar.id = "field";
+      const search = document.querySelector("#field");
+
       header.appendChild(bar);
       submit.textContent = "submit";
       header.appendChild(submit);
     
     submit.addEventListener("click", (e) => {
-        
-        filterList.push(bar.value.toUpperCase());
+        filterList.push(bar.value.toLowerCase());       
         console.log(filterList);
-        for (let k = 0; k < filterList; k++) {
-        let result = filterList[k];
-            let textValue = result.textContent || result.innerText;
-            if (textValue.toUpperCase() = indexOf(bar.value.toUpperCase())) {
-                showPage(list, textValue);
-            } else {
-                value.style.display = "none";
-            }
+        for (let k = 0; k < list; k++) {
+            if (search.value.length !== 0 && list[k].textContent.toLowerCase() == indexOf(search.value.toLowerCase())) {
+                filterList[k].style.display = "";
+             } else {
+                 filterlist[k].style.display = "none";
+             } 
+                }
+    });   
         }
-    });
-      
-    /*
-    //submit.addEventListener ("click", (e) => {
-        
-    //Trying to target the class name, then narrow it by h3 value. Source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
-      for (var k = 0; k < list; k++) {
-          let result = list[k].getElementsByTagName("h3")[0];
-          console.log(result);
-          //let textValue = result.textContent || result.innerText;
-          //if (textValue.toUpperCase().indexOf(filter) > -1) {
-              //result.style.display = "";
-            //} else {
-                //result.style.display = "none";
-            //}
-      //}
-    //}); 
-}*/
-}
 
 function showPage(list, page) {
 
