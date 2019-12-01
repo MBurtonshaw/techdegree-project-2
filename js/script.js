@@ -6,38 +6,35 @@ FSJS project 2 - List Filter and Pagination
 const li = document.getElementsByClassName("student-item");
 const studentsPerPage = 10;
 
+
 //Add searchbar--- NOT FUNCTIONING YET--- source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
-function searchBar(list) {
-      
+
+  function searchBar(list) { 
       const bar = document.createElement("INPUT");
       bar.type = "text";
       bar.id = "field";
       const header = document.getElementsByClassName("page-header")[0];
       const submit = document.createElement("BUTTON");
-      let filterList = [];
-
 
       header.appendChild(bar);
       submit.textContent = "submit";
       header.appendChild(submit);
     
-    submit.addEventListener("click", (e) => {
-        let submit = e.target;
-        let search = document.querySelector("#field");
-        let searchValue = search.value.toLowerCase();
-        let text = search.textContent.toLowerCase();
-        
-        filterList.push(searchValue);      
-        console.log(filterList);
+      submit.addEventListener("click", (e) => {
         for (let k = 0; k < list; k++) {
-            if(text == indexOf(searchValue)) {
-               appendPageLinks(filterList);
-               } else {
-                   showPage(li, 1);
-               }
-    }
-    });   
-}
+        
+        let search = document.getElementById("field");
+        let searchValue = search.value.toLowerCase();
+        let searchLength = search.value.length;
+        let text = list[k].textContent.toLowerCase();
+        let filterList = [];
+            
+            //if () {}
+            
+        }
+    }); 
+} 
+
 
 function showPage(list, page) {
 
@@ -54,9 +51,6 @@ function showPage(list, page) {
 }
 
 function appendPageLinks(list) {
-
-    showPage(li, 1);
-    searchBar(li);
     
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
@@ -93,5 +87,6 @@ function appendPageLinks(list) {
 }
 
 
-
+showPage(li, 1);
+searchBar();
 appendPageLinks(li);
