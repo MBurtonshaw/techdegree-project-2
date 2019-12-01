@@ -15,24 +15,29 @@ function searchBar(list) {
       const header = document.getElementsByClassName("page-header")[0];
       const submit = document.createElement("BUTTON");
       let filterList = [];
-      const search = document.querySelector("#field");
+
 
       header.appendChild(bar);
       submit.textContent = "submit";
       header.appendChild(submit);
     
     submit.addEventListener("click", (e) => {
-        filterList.push(bar.value.toLowerCase());       
+        let submit = e.target;
+        let search = document.querySelector("#field");
+        let searchValue = search.value.toLowerCase();
+        let text = search.textContent.toLowerCase();
+        
+        filterList.push(searchValue);      
         console.log(filterList);
         for (let k = 0; k < list; k++) {
-            if (search.value.length !== 0 && list[k].textContent.toLowerCase() == indexOf(search.value.toLowerCase())) {
-                filterList[k].style.display = "";
-             } else {
-                 filterlist[k].style.display = "none";
-             } 
-                }
+            if(text == indexOf(searchValue)) {
+               appendPageLinks(filterList);
+               } else {
+                   showPage(li, 1);
+               }
+    }
     });   
-        }
+}
 
 function showPage(list, page) {
 
@@ -47,7 +52,6 @@ function showPage(list, page) {
         }
     }
 }
-
 
 function appendPageLinks(list) {
 
