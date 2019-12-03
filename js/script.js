@@ -10,30 +10,34 @@ const studentsPerPage = 10;
 //Add searchbar--- NOT FUNCTIONING YET--- source: https://www.w3schools.com/howto/howto_js_filter_lists.asp
 
   function searchBar(list) { 
-      const bar = document.createElement("INPUT");
-      bar.type = "text";
-      bar.id = "field";
       const header = document.getElementsByClassName("page-header")[0];
-      const submit = document.createElement("BUTTON");
-
-      header.appendChild(bar);
-      submit.textContent = "submit";
-      header.appendChild(submit);
-    
-      submit.addEventListener("click", (e) => {
-        for (let k = 0; k < list; k++) {
-        
-        let search = document.getElementById("field");
-        let searchValue = search.value.toLowerCase();
-        let searchLength = search.value.length;
-        let text = list[k].textContent.toLowerCase();
-        let filterList = [];
+      const searchDiv = document.createElement("DIV");
+      const searchForm = document.createElement("form");
+      const searchText = document.createElement("input");
+      searchText.type = "text";
+      searchForm.id = "search-input";
+      header.appendChild(searchDiv);
+      searchDiv.appendChild(searchForm);
+      searchForm.appendChild(searchText);
+      const searchBar = document.forms["search-input"].querySelector("input");
+      
+      searchBar.addEventListener("keyup", (e) => {
+         const submit = e.target.value.toLowerCase();
+         let filterList = [];
+          
+          for (let k = 0; k < list.length; k++) {
+              const title = list[k].getElementsByTagName("h3").textContent;
+              
+              if (title.toLowerCase().indexOf(submit) != -1) {
+                  filterList.push(title);
+                  appendPageLinks(filterList);
+                  } else {
+                      showPage(list, 1);
+                  }
+          }
+      });
             
-            //if () {}
-            
-        }
-    }); 
-} 
+    }
 
 
 function showPage(list, page) {
@@ -88,5 +92,5 @@ function appendPageLinks(list) {
 
 
 showPage(li, 1);
-searchBar();
+searchBar(li);
 appendPageLinks(li);
