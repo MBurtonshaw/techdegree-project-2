@@ -32,14 +32,12 @@ const studentsPerPage = 10;
               if (title.toLowerCase().indexOf(submit) != -1 && submit == title) {
                   filterList.push(title);
                   console.log(filterList);
-                  filterList.display = "block";
-                  list.display = "none";
-                  //appendPageLinks(filterList);
-                  } 
+                  console.log(filterList[k]);
+                  console.log(list[k]);
+              }
           }
       }); 
-            
-    }
+  }
 
 
 function showPage(list, page) {
@@ -49,9 +47,9 @@ function showPage(list, page) {
     let end = begin + studentsPerPage;
     for (let i = 0; i < list.length; i++) {     
         if (i >= begin && i < end) {            
-            list[i].style.display = "block";
+            list[i].style.display == "block";
         } else {
-            list[i].style.display = "none";
+            list[i].style.display == "none";
         }
     }
 }
@@ -93,7 +91,6 @@ function appendPageLinks(list) {
     }
 }
 
-
+appendPageLinks(li);
 showPage(li, 1);
 searchBar(li);
-appendPageLinks(li);
