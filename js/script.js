@@ -20,22 +20,24 @@ const studentsPerPage = 10;
       searchDiv.appendChild(searchForm);
       searchForm.appendChild(searchText);
       const searchBar = document.forms["search-input"].querySelector("input");
+      let filterList = [];
       
       searchBar.addEventListener("keyup", (e) => {
          const submit = e.target.value.toLowerCase();
-         let filterList = [];
+
           
           for (let k = 0; k < list.length; k++) {
-              const title = list[k].getElementsByTagName("h3").textContent;
-              
-              if (title.toLowerCase().indexOf(submit) != -1) {
+              const title = document.getElementsByTagName("h3")[k].textContent;
+    //Added && to conditional statement because it was logging every character instead of whole entries
+              if (title.toLowerCase().indexOf(submit) != -1 && submit == title) {
                   filterList.push(title);
-                  appendPageLinks(filterList);
-                  } else {
-                      showPage(list, 1);
-                  }
+                  console.log(filterList);
+                  filterList.display = "block";
+                  list.display = "none";
+                  //appendPageLinks(filterList);
+                  } 
           }
-      });
+      }); 
             
     }
 
@@ -55,12 +57,13 @@ function showPage(list, page) {
 }
 
 function appendPageLinks(list) {
-    
+
       const newDiv = document.createElement("DIV");
       newDiv.className = "pagination";
-    
     //otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
-      let otherDiv = document.getElementsByClassName("page")[0];
+    let otherDiv = document.getElementsByClassName("page")[0];
+    
+
       let ul = document.createElement("UL");
       newDiv.appendChild(ul);
       otherDiv.appendChild(newDiv);
