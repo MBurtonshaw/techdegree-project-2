@@ -12,6 +12,7 @@ const studentsPerPage = 10;
   function searchBar(list) { 
       const header = document.getElementsByClassName("page-header")[0];
       const searchDiv = document.createElement("DIV");
+      searchDiv.className = "student-search";
       const searchForm = document.createElement("form");
       const searchText = document.createElement("input");
       searchText.type = "text";
@@ -23,19 +24,17 @@ const studentsPerPage = 10;
       let filterList = [];
       
       searchBar.addEventListener("keyup", (e) => {
-         const submit = e.target.value.toLowerCase();
-
+          e.preventDefault();
+         const submit = e.target.value;
           
           for (let k = 0; k < list.length; k++) {
-              const title = document.getElementsByTagName("h3")[k].textContent;
-    //Added && to conditional statement because it was logging every character instead of whole entries
-              if (title.toLowerCase().indexOf(submit) != -1 && submit == title) {
-                  filterList.push(title);
-                  console.log(filterList);
-                  console.log(filterList[k]);
-                  console.log(list[k]);
+          const title = document.getElementsByTagName("h3")[k].textContent;
+
+              if (title.toLowerCase().includes(submit.toLowerCase())) {
+                  filterList.push(list[k]);
               }
-          }
+          } showPage(list, filterList);
+          appendPageLinks(filterList);
       }); 
   }
 
@@ -47,25 +46,31 @@ function showPage(list, page) {
     let end = begin + studentsPerPage;
     for (let i = 0; i < list.length; i++) {     
         if (i >= begin && i < end) {            
-            list[i].style.display == "block";
+            list[i].style.display = "block";
         } else {
-            list[i].style.display == "none";
+            list[i].style.display = "none";
         }
     }
 }
 
 function appendPageLinks(list) {
+let divCheck = document.getElementsByClassName("pagination");
+//otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
+let otherDiv = document.getElementsByClassName("page")[0];
+    
+    if (divCheck = true) {
+        divCheck.parentNode.removeChild(divCheck);
+    }
+    
+    const newDiv = document.createElement("DIV");
+    newDiv.className = "pagination";
+    newDiv.id = "newDiv";
 
-      const newDiv = document.createElement("DIV");
-      newDiv.className = "pagination";
-    //otherDiv must be set to [0] because it is a collection of HTML elements, not one node in itself
-    let otherDiv = document.getElementsByClassName("page")[0];
+    let ul = document.createElement("UL");
+    newDiv.appendChild(ul);
+    otherDiv.appendChild(newDiv); 
     
 
-      let ul = document.createElement("UL");
-      newDiv.appendChild(ul);
-      otherDiv.appendChild(newDiv);
-    
     //Loop is to set the number of pages based on totalPages, then create a page button corresponding to each
       let totalPages = Math.ceil(list.length / studentsPerPage);
       for (i = 0; i < totalPages; i++) {
