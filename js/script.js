@@ -13,6 +13,7 @@ function searchBar(list) {
   const submitButton = document.createElement("button");
   searchText.type = "text";
   searchText.id = "searchText";
+  searchText.className = "input";
   searchText.placeholder = "Search for students...";
   submitButton.textContent = "Search";
   submitButton.className = "button";
@@ -21,7 +22,6 @@ function searchBar(list) {
   searchDiv.appendChild(submitButton);
   let searchBar = document.getElementById("searchText");
   let searchButton = document.querySelector("button");
-  
   searchButton.addEventListener("click", (e) => {
     let filterList = [];
     searchButton = e.target;
@@ -29,12 +29,10 @@ function searchBar(list) {
     for (let k = 0; k < list.length; k++) {
       list[k].style.display = "none";
       const title = document.getElementsByTagName("h3")[k].textContent;
-      
-    if (title.toLowerCase().includes(submit.toLowerCase())) {
+      if (title.toLowerCase().includes(submit.toLowerCase())) {
         filterList.push(list[k]);
       }
     }
-    
     if (filterList.length === 0) {
       let errorDiv = document.createElement("div");
       let otherDiv = document.getElementsByClassName("page")[0];
@@ -43,6 +41,8 @@ function searchBar(list) {
       otherDiv.insertBefore(errorDiv, paginationDiv);
       errorDiv.id = "errorDiv";
       errorDiv.innerHTML = "<p>" + "No results found" + "</p>";
+    } else {
+      errorDiv.style.display = "none";
     }
     showPage(filterList, 1);
     appendPageLinks(filterList);
@@ -54,7 +54,6 @@ function showPage(list, page) {
   let begin = (page - 1) * studentsPerPage;
   let end = begin + studentsPerPage;
   for (let i = 0; i < list.length; i++) {
-    
     if (i >= begin && i < end) {
       list[i].style.display = "block";
     } else {
@@ -65,11 +64,9 @@ function showPage(list, page) {
 
 function appendPageLinks(list) {
   let divCheck = document.getElementById("newDiv");
-  
-  if (divCheck === true) {
+  if (divCheck !== null) {
     divCheck.parentNode.removeChild(divCheck);
   }
-    
   let otherDiv = document.getElementsByClassName("page")[0];
   let newDiv = document.createElement("DIV");
   newDiv.className = "pagination";
@@ -77,7 +74,6 @@ function appendPageLinks(list) {
   let ul = document.createElement("UL");
   newDiv.appendChild(ul);
   otherDiv.appendChild(newDiv);
-    
   //Loop is to set the number of pages based on totalPages, then create a page button corresponding to each
   let totalPages = Math.ceil(list.length / studentsPerPage);
   for (i = 0; i < totalPages; i++) {
@@ -88,7 +84,6 @@ function appendPageLinks(list) {
     a.className = "paginationButtons";
     a.textContent = i + 1;
     a.href = "#";
-      
     //Adding function to the buttons
     button.addEventListener("click", (e) => {
       let buttons = document.getElementsByTagName("a");
